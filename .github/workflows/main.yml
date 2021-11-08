@@ -7,6 +7,7 @@ on:
 
 jobs:
  createrelease:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     name: Create Release
     runs-on: [ubuntu-latest]
     steps:
@@ -36,6 +37,7 @@ jobs:
          name: release_url
          path: release_url.txt
  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     name: Build packages
     needs: createrelease
     runs-on: ${{ matrix.os }}
